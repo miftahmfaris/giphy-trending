@@ -14,6 +14,11 @@ const Card = styled.div`
     }
 `;
 
+const Notification = styled.h2`
+    font-family: monospace;
+    text-align: center;
+`;
+
 export default function ListGIF(props) {
     const [data, setData] = useState([]);
 
@@ -34,15 +39,19 @@ export default function ListGIF(props) {
 
     return (
         <div>
-            <CardList>
-                {data.map((item) => {
-                    return (
-                        <Card key={item.id}>
-                            <img src={item.images.original.url} alt="gif" />
-                        </Card>
-                    );
-                })}
-            </CardList>
+            {data.length === 0 ? (
+                <Notification>Data is not found</Notification>
+            ) : (
+                <CardList>
+                    {data.map((item) => {
+                        return (
+                            <Card key={item.id}>
+                                <img src={item.images.original.url} alt="gif" />
+                            </Card>
+                        );
+                    })}
+                </CardList>
+            )}
         </div>
     );
 }
